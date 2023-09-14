@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "electron": "^26.2.0",
+    "electron-context-menu": "^3.6.1"
+  },
+  "name": "snot-social",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
