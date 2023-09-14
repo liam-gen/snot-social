@@ -1,7 +1,5 @@
-<h1 style="display: flex;align-items:center;justify-content:center;gap: 20px;">
-<img style="vertical-align:middle" src="assets/banner.png" width="200px">
-<font size="50px">X</font>
-<img style="vertical-align:middle" src="assets/lgjs.png" width="300px">
+<h1 style="display: flex;align-items:center;justify-content:center;">
+<img src="assets/x.png">
 </h1>
 
 Application Windows <u><b>tierce</b></u> pour SNOT
@@ -20,6 +18,4 @@ Application Windows <u><b>tierce</b></u> pour SNOT
 
 
 
-<a href="https://liamgenjs.vercel.app">
-    <img src="https://liamgenjs.vercel.app/cdn/img/banner.png" height="30px">
-</a>
+Propulsé par liamgen.js
