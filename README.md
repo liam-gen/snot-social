@@ -1,6 +1,6 @@
 <h1 style="display: flex;align-items:center;justify-content:center;gap: 20px;">
 <img style="vertical-align:middle" src="assets/banner.png" width="200px">
-<span style="font-size: 50px">X</span>
+<p style="font-size: 50px">X</p>
 <img style="vertical-align:middle" src="assets/lgjs.png" width="300px">
 </h1>
 
