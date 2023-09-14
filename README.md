@@ -1,8 +1,9 @@
-<h1 style="display: flex;align-items:center;justify-content:center;gap: 20px;">
+<h1 style="display: flex;align-items:center;justify-content:center;gap: 20px;vertical-align: middle;">
 <img src="assets/banner.png" width="200px">
 <span>X</span>
-<img src="assets/lgjs.png" width="500px">
+<img src="assets/lgjs.png" width="300px">
 </h1>
+
 Application Windows <u><b>tierce</b></u> pour SNOT
 
 
