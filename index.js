@@ -37,7 +37,7 @@ function createWindow() {
       win.resizable = true;
     }, 3000)
 
-    let data = JSON.parse(fs.readFileSync("cache/cookies.json", "utf8"));
+    let data = JSON.parse(fs.readFileSync(__dirname+"/cache/cookies.json", "utf8"));
     data.forEach(cookie => {
         session.fromPartition('persist:webview').cookies.set(cookie) .then((cookies) => {
             console.log("SETTING COOKIE")
@@ -68,7 +68,7 @@ ipcMain.on("store-cookies", (event, arg) => {
     
     session.fromPartition('persist:webview').cookies.get({}) .then((cookies) => {
         cookies.forEach((a, b) => {cookies[b]["url"] = "https://snot.fr"})
-        fs.writeFileSync("cache/cookies.json", JSON.stringify(cookies))
+        fs.writeFileSync(__dirname+"/cache/cookies.json", JSON.stringify(cookies))
       }).catch((error) => {
         console.log(error)
       })
@@ -117,7 +117,7 @@ app.on("web-contents-created", (e, contents) => {
  ipcMain.on("close-window", (event, arg) => {
     session.fromPartition('persist:webview').cookies.get({}) .then((cookies) => {
         cookies.forEach((a, b) => {cookies[b]["url"] = "https://snot.fr"})
-        fs.writeFile("cache/cookies.json", JSON.stringify(cookies), () => win.close())
+        fs.writeFile(__dirname+"/cache/cookies.json", JSON.stringify(cookies), () => win.close())
       }).catch((error) => {
         console.log(error)
       })

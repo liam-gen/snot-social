@@ -88,22 +88,22 @@
         <script>
             const fs = require("fs");
 
-            let settings = JSON.parse(fs.readFileSync("cache/settings.json", "utf-8"));
+            let settings = JSON.parse(fs.readFileSync(__dirname+"/../cache/settings.json", "utf-8"));
 
             document.getElementById("background").value = settings["background"] ? settings["background"] : ""
 
             function save(){
-                let data = JSON.parse(fs.readFileSync("cache/settings.json", "utf-8"));
+                let data = JSON.parse(fs.readFileSync(__dirname+"/../cache/settings.json", "utf-8"));
                 data["background"] = document.getElementById("background").value
                 console.log(data)
-                fs.writeFileSync("cache/settings.json", JSON.stringify(data));
+                fs.writeFileSync(__dirname+"/../cache/settings.json", JSON.stringify(data));
                 window.close()
             }
 
-            let files = fs.readdir("css", (err, files) => {
+            let files = fs.readdir(__dirname+"/../css", (err, files) => {
                 console.log(files)
                 files.forEach(file => {
-                    let cssContent = fs.readFileSync("css/"+file, "utf-8");
+                    let cssContent = fs.readFileSync(__dirname+"/../css/"+file, "utf-8");
 
                     const match = /\/\*\s*([\s\S]*?)\s*\*\//.exec(cssContent);
                         if (match && match.length > 1) {

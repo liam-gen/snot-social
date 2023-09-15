@@ -1,1 +1,1 @@
-electron-packager . --overwrite --icon=assets/favicon.ico --platform=win32 --arch=x64 --prune=true
+electron-packager . --overwrite --icon=assets/favicon.ico --platform=win32 --arch=x64 --prune=true --name=SnotApp --asar

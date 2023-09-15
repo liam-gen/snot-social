@@ -10,6 +10,9 @@ lerna-debug.log*
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
+# BUILD
+snot-social-win32-x64
+
 # Runtime data
 pids
 *.pid
