@@ -15,7 +15,3 @@ Application Windows <u><b>tierce</b></u> pour SNOT
 <a href="https://www.electronjs.org/fr/">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Electron_Software_Framework_Logo.svg/1200px-Electron_Software_Framework_Logo.svg.png" height="30px">
 </a>
-
-
-
-Propulsé par liamgen.js

@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "electron": "^26.2.0",
-    "electron-context-menu": "^3.6.1"
+    "electron-context-menu": "^3.6.1",
+    "electron-packager": "^17.1.2"
   },
   "name": "snot-social",
   "version": "1.0.0",

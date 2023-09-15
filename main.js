@@ -8,7 +8,7 @@ const closeButton = document.getElementById("close-btn");
 const settingsBtn = document.getElementById("settings-btn");
 
 settingsBtn.addEventListener("click", e => {
-    let set = window.open('settings.html', '_blank', 'nodeIntegration=yes,top=10,frame=no,width=500,contextIsolation=no');
+    let set = window.open('pages/settings.html', '_blank', 'nodeIntegration=yes,top=10,frame=no,width=500,contextIsolation=no');
 })
 let close = false;
 

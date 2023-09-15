@@ -26,7 +26,7 @@ function createWindow() {
         },
     });
 
-    win.loadFile("loading.html")
+    win.loadFile("pages/loading.html")
     win.center()
 
     
