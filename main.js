@@ -35,6 +35,7 @@ ipcRenderer.on("forward", () => {
     webview.goForward();
 })
 
+
 webview.addEventListener('dom-ready', function () {
 
     injectCSSFromSrc("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css")
@@ -61,6 +62,20 @@ webview.addEventListener('dom-ready', function () {
             r.style.setProperty('--background-url', 'url("${settings["background"]}")');
         `)
     }
+
+    if(settings["font"] && settings["font"] != "false"){
+        webview.executeJavaScript(`
+            var xyz = document.createElement('style');
+            xyz.innerHTML = '*{font-family: "${settings["font"]}"}'
+            document.head.appendChild(xyz)
+        `)
+    }
+
+    webview.addEventListener('console-message', (e) => {
+        if(e.message.startsWith("snot-require-url: ")){
+            injectJSFromSrc(e.message.replace("snot-require-url: ", ""))
+        }
+      });
 });
 
 document.addEventListener("keypress", function onEvent(event) {
@@ -82,7 +97,7 @@ window.onbeforeunload = function(e) {
 
 function injectCSSFromSrc(src){
     let inject = `
-        let link = document.createElement('link')
+        var link = document.createElement('link')
         link.rel = 'stylesheet'
         link.src = "${src}"
 
@@ -94,7 +109,7 @@ function injectCSSFromSrc(src){
 
 function injectJSFromSrc(src){
     let inject = `
-        let script = document.createElement('script')
+    var script = document.createElement('script')
         script.src = "${src}"
 
         document.head.appendChild(script)
@@ -102,4 +117,3 @@ function injectJSFromSrc(src){
 
     webview.executeJavaScript(inject)
 }
-

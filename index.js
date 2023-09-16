@@ -1,4 +1,4 @@
-const { app, BrowserWindow, session, ipcMain, autoUpdater, dialog } = require('electron');
+const { app, BrowserWindow, session, ipcMain, autoUpdater, dialog, shell } = require('electron');
 const fs = require("fs")
 const {exec} = require('child_process');
 
@@ -47,8 +47,10 @@ function createWindow() {
     })
 
     win.webContents.on("did-attach-webview", (_, contents) => {
-        contents.setWindowOpenHandler((details) => {
-          exec("start "+details.url)
+        contents.setWindowOpenHandler(({url}) => {
+          setImmediate(() => {
+            shell.openExternal(url)
+          })
           return { action: 'deny' }
         })
       })
