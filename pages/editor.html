@@ -36,7 +36,13 @@
     </main>
     <script>
         const fs = require("fs")
-        let data = fs.readFileSync(__dirname+"/../"+new URL(location.href).searchParams.get("file"), "utf8")
+
+        function getDB(){
+                return fs.readFileSync(__dirname+"/../cache/database.txt", "utf-8")
+            }
+
+
+        let data = fs.readFileSync(getDB()+"/"+new URL(location.href).searchParams.get("file"), "utf8")
         let editor = CodeMirror(document.querySelector('main'), {
             lineNumbers: true,
             theme: 'dracula',
@@ -55,7 +61,7 @@
         // Prevent the Save dialog to open
         e.preventDefault();
         // Place your code here
-        fs.writeFileSync(__dirname+"/../"+new URL(location.href).searchParams.get("file"), editor.getValue());
+        fs.writeFileSync(getDB()+"/"+new URL(location.href).searchParams.get("file"), editor.getValue());
     }
     });
     </script>

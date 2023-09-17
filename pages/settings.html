@@ -133,6 +133,13 @@ select::-ms-expand {
         </div>
     </header>
     <main>
+        <script>
+             const fs = require("fs");
+
+            function getDB(){
+                return fs.readFileSync(__dirname+"/../cache/database.txt", "utf-8")
+            }
+        </script>
         <h2>Paramètres</h2>
 
         <h3>Fond d'écran</h3>
@@ -148,16 +155,16 @@ select::-ms-expand {
 
         <h3>Thèmes</h3>
 
-        <a onclick='require("child_process").exec(`start "" ${__dirname+"/../css"}`);'>Ouvrir le dossier des thèmes</a>
+        <a onclick='require("child_process").exec(`start "" ${getDB()+"/css"}`);'>Ouvrir le dossier des thèmes</a>
 
         <ul id="themes">
 
         </ul>
 
         <script>
-            const fs = require("fs");
+           
 
-            let settings = JSON.parse(fs.readFileSync(__dirname+"/../cache/settings.json", "utf-8"));
+            let settings = JSON.parse(fs.readFileSync(getDB()+"/settings.json", "utf-8"));
 
             let fonts = ["Arial", "Verdana", "Tahoma","Trebuchet MS", "Times New Roman", "Georgia", "Garamond", "Courier New", "Brush Script MT"]
 
@@ -175,18 +182,18 @@ select::-ms-expand {
             document.getElementById("font").value = settings["font"] ? settings["font"] : "false"
 
             function save(){
-                let data = JSON.parse(fs.readFileSync(__dirname+"/../cache/settings.json", "utf-8"));
+                let data = JSON.parse(fs.readFileSync(getDB()+"/settings.json", "utf-8"));
                 data["background"] = document.getElementById("background").value
                 data["font"] = document.getElementById("font").value
                 console.log(data)
-                fs.writeFileSync(__dirname+"/../cache/settings.json", JSON.stringify(data));
+                fs.writeFileSync(getDB()+"/settings.json", JSON.stringify(data));
                 window.close()
             }
 
-            let files = fs.readdir(__dirname+"/../css", (err, files) => {
+            let files = fs.readdir(getDB()+"/css", (err, files) => {
                 console.log(files)
                 files.forEach(file => {
-                    let cssContent = fs.readFileSync(__dirname+"/../css/"+file, "utf-8");
+                    let cssContent = fs.readFileSync(getDB()+"/css/"+file, "utf-8");
 
                     const match = /\/\*\s*([\s\S]*?)\s*\*\//.exec(cssContent);
                         if (match && match.length > 1) {
@@ -224,16 +231,16 @@ select::-ms-expand {
 
 <h3>Plugins</h3>
 
-<a onclick='require("child_process").exec(`start "" ${__dirname+"/../js"}`);'>Ouvrir le dossier des plugins</a>
+<a onclick='require("child_process").exec(`start "" ${getDB()+"/js"}`);'>Ouvrir le dossier des plugins</a>
 <ul id="plugins">
 
 </ul>
 
 <script>
-    let files2 = fs.readdir(__dirname+"/../js", (err, files) => {
+    let files2 = fs.readdir(getDB()+"/js", (err, files) => {
         console.log(files)
         files.forEach(file => {
-            let cssContent = fs.readFileSync(__dirname+"/../js/"+file, "utf-8");
+            let cssContent = fs.readFileSync(getDB()+"/js/"+file, "utf-8");
 
             const match = /\/\*\s*([\s\S]*?)\s*\*\//.exec(cssContent);
                 if (match && match.length > 1) {

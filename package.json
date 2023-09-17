@@ -1,13 +1,14 @@
 {
   "dependencies": {
-    "electron-context-menu": "^3.6.1"
+    "electron-context-menu": "^3.6.1",
+    "uaup-js": "^0.0.22"
   },
   "name": "snot-social",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron .",
+    "start": "electron . cache",
     "dist": "electron-builder"
   },
   "keywords": [],

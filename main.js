@@ -35,27 +35,34 @@ ipcRenderer.on("forward", () => {
     webview.goForward();
 })
 
+function getDB(){
+    return fs.readFileSync(__dirname+"/cache/database.txt", "utf-8")
+}
+
 
 webview.addEventListener('dom-ready', function () {
 
     injectCSSFromSrc("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css")
     injectJSFromSrc("https://cdn.jsdelivr.net/npm/sweetalert2@11")
 
-    fs.readdir(__dirname + "/css", (err, files) => {
+    fs.readdir(getDB() + "/css", (err, files) => {
         files.forEach(file => {
-            let data = fs.readFileSync(__dirname + "/css/"+file, "utf8");
+            console.log(file)
+            let data = fs.readFileSync(getDB() + "/css/"+file, "utf8");
+            console.log(data)
             webview.insertCSS(data)
         });
     })
 
-    fs.readdir(__dirname + "/js", (err, files) => {
+    fs.readdir(getDB() + "/js", (err, files) => {
         files.forEach(file => {
-            let data = fs.readFileSync(__dirname + "/js/"+file, "utf8");
+            let data = fs.readFileSync(getDB() + "/js/"+file, "utf8");
             webview.executeJavaScript(data)
         });
     })
 
-    let settings = JSON.parse(fs.readFileSync(__dirname + "/cache/settings.json", "utf8"));
+    let settings = JSON.parse(fs.readFileSync(getDB() + "/settings.json", "utf8"));
+    console.log(settings)
     if(settings["background"]){
         webview.executeJavaScript(`
             var r = document.querySelector(':root');

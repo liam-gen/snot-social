@@ -1,22 +1,17 @@
-const { app, BrowserWindow, session, ipcMain, autoUpdater, dialog, shell } = require('electron');
+const { app, BrowserWindow, session, ipcMain, dialog, shell } = require('electron');
 const fs = require("fs")
-const {exec} = require('child_process');
 
 const contextMenu = require('electron-context-menu');
 
-if(app.isPackaged){
-  // app
-}
-
 let win;
+let database;
 function createWindow() {
     win = new BrowserWindow({
-        height: 200,
-        width: 350,
+        height: 700,
+        width: 900,
         frame: false,
         autoHideMenuBar: true,
         icon: "assets/logo.png",
-        resizable: false,
         webPreferences: {
             nodeIntegration: true,
             enableRemoteModule: true,
@@ -25,19 +20,20 @@ function createWindow() {
             spellcheck: true
         },
     });
-
-    win.loadFile("pages/loading.html")
     win.center()
+    win.maximize();
+    win.loadFile("index.html")
 
-    
+    if(app.isPackaged){
+      fs.writeFileSync(__dirname+"/cache/database.txt", process.argv[1])
+      database = process.argv[1]
+    }
+    else{
+      fs.writeFileSync(__dirname+"/cache/database.txt", __dirname+'/'+process.argv[2])
+      database = __dirname+"/"+process.argv[2]
+    }
 
-    setTimeout(function() {
-      win.maximize();
-      win.loadFile("index.html")
-      win.resizable = true;
-    }, 3000)
-
-    let data = JSON.parse(fs.readFileSync(__dirname+"/cache/cookies.json", "utf8"));
+    let data = JSON.parse(fs.readFileSync(database+"/cookies.json", "utf8"));
     data.forEach(cookie => {
         session.fromPartition('persist:webview').cookies.set(cookie) .then((cookies) => {
             console.log("SETTING COOKIE")
@@ -70,7 +66,7 @@ ipcMain.on("store-cookies", (event, arg) => {
     
     session.fromPartition('persist:webview').cookies.get({}) .then((cookies) => {
         cookies.forEach((a, b) => {cookies[b]["url"] = "https://snot.fr"})
-        fs.writeFileSync(__dirname+"/cache/cookies.json", JSON.stringify(cookies))
+        fs.writeFileSync(database+"/cookies.json", JSON.stringify(cookies))
       }).catch((error) => {
         console.log(error)
       })
@@ -119,7 +115,7 @@ app.on("web-contents-created", (e, contents) => {
  ipcMain.on("close-window", (event, arg) => {
     session.fromPartition('persist:webview').cookies.get({}) .then((cookies) => {
         cookies.forEach((a, b) => {cookies[b]["url"] = "https://snot.fr"})
-        fs.writeFile(__dirname+"/cache/cookies.json", JSON.stringify(cookies), () => win.close())
+        fs.writeFile(database+"/cookies.json", JSON.stringify(cookies), () => win.close())
       }).catch((error) => {
         console.log(error)
       })
